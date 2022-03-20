@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>Hello</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<style>
+		* {
+			font-family: "メイリオ",Meiryo, Osaka,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+			font-size: 12px;
+			line-height: 140%;
+			color: orange;
+		}
+		body {
+			background-color:black;
+		}
+		input, 
+		button, 
+		p {
+			border : 3px solid orange;
+		  	border-radius: 4px;
+			background: transparent;
+			padding: 8px;
+		}
+		#log {
+			width:300px;
+			height:64px;
+			overflow:hidden;
+		}
+		input {
+		    padding: 8px 8px;
+		    border-radius: 4px;
+		}
+		button {
+			padding: 3px;
+		}
+		#cardPain,
+		#optionPain {
+			width: 330px; 
+			height: 100%; 
+			display: none; 
+			position: fixed;
+			top: 0;left: 0; 
+			padding:30px; 
+			background: #000;
+		}
+	</style>
+</head>
+<body>
+
+<canvas width="1527" height="1080" id="mapCanvas"        style="position: fixed;top: 0;right: 0;"></canvas>
+<canvas width="128"  height="128"  id="saikoroCanvas"  style="border-radius: 10px; border: 4px solid #ddd; position: fixed;top: 225px;right: 220px;"></canvas>
+<canvas width="390"  height="800"  id="charasCanvas"   style="position: fixed;top: 0;left: 0;"></canvas>
+
+
+<canvas width="3968" height="2806" id="prerender" style="display:none;"></canvas>
+<script src="view.js"></script>
+
+
+<div id="cardPain">
+	<canvas width="300" height="475" id="cardCanvas"></canvas>
+</div>
+
+<div id="optionPain">
+	<label>移動速度(整数): </label><input type="text" value="" id="charaForce" /> <br />
+	<label>縮尺(0~1.0): </label><input type="text" value="" id="charaScale" /> <br />
+	<label>名前: </label><input type="text" value="" id="charaName" /> <br />
+	<label>カラー(0~4): </label><input type="text" value="" id="charaColor" /><br />
+	<audio controls loop src="https://ow-bgm.s3.ap-northeast-1.amazonaws.com/OWsugorokuBGM.wav">
+		<code>audio</code>
+	</audio>
+	<p id="log"></p>
+	<input id="msg" /><button id="sendMsg">send</button>
+</div>
+
+<div id="systemPain" style="padding: 20px; width: 350px; position: fixed; bottom: 0; left: 0; text-align: right;">
+	<button id="cardBtn">card</button>
+	<button id="optionBtn">option</button>
+</div>
+
+<div id="loading" style="position: fixed; top: 0; left: 0; width:100%; height: 100%; padding: 16px; background:black;">
+	<div style="position: absolute; top: 50%; left: 50%; font-size: 2em;">loading...</div>
+</div>
+
+</body>
+</html>
+
